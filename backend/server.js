@@ -2,14 +2,10 @@ import express from 'express';
 import { connectDB } from './config/db.js';
 import dotenv from 'dotenv';
 import Product from './models/product.js';
+import mongoose from 'mongoose';
 dotenv.config(); //configure environment variable
 
 const app = express(); //create the express server
-
-
-// app.get("/products", (req, res) => {
-//     res.send("Server is ready");
-// })
 
 app.use(express.json()); //add a middleware, allowing use to accept JSON data in the req.body
 
@@ -38,7 +34,28 @@ app.post("/api/products", async (req, res) => {
         await newProduct.save();
         res.status(201).json({ success: true, data: newProduct });
     } catch (error) {
-        console.error("Error in Create product:", error.message); //for debugging
+        console.error("Error in creating product:", error.message); //for debugging
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+})
+
+//update a product
+app.put("/api/products/:id", async (req, res) => {
+    const { id } = req.params; // the id of the product to be updated
+
+    const product = req.body; // the product to be updated, contains name, price, image
+
+    //add the logic to check whether the id is valid or not
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: "Invalid Product Id" });
+    }
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true })  // if set new:true, it will give you the object after update is applied
+        console.log(updatedProduct);
+        res.status(200).json({ success: true, data: updatedProduct })
+    } catch (error) {
+        console.error("Error in updating product:", error.message); //for debugging
         res.status(500).json({ success: false, message: "Server Error" });
     }
 })
@@ -51,7 +68,7 @@ app.delete("/api/products/:id", async (req, res) => {
         await Product.findByIdAndDelete(id);
         res.status(200).json({ success: true, message: "Product deleted" });
     } catch (error) {
-        console.log("error in deleting the product:", error.message); //for debugging
+        console.log("error in deleting product:", error.message); //for debugging
         res.status(404).json({ success: false, message: "Product not found" });
     }
 })
