@@ -1,77 +1,15 @@
 import express from 'express';
 import { connectDB } from './config/db.js';
 import dotenv from 'dotenv';
-import Product from './models/product.js';
-import mongoose from 'mongoose';
+import productRoutes from './routes/product.route.js';
+
 dotenv.config(); //configure environment variable
 
 const app = express(); //create the express server
 
 app.use(express.json()); //add a middleware, allowing use to accept JSON data in the req.body
 
-// get all products 
-app.get("/api/products", async (req, res) => {
-    try {
-        const products = await Product.find({}); // if we pass an emptry object, this means fetch all the products in the database
-        console.log(products);
-        res.status(200).json({ success: true, data: products })
-    } catch (error) {
-        console.log("error in fetching products:", error.message); //for debugging
-        res.status(500).json({ success: false, message: "Server Error" })
-    }
-});
-
-// post a new product
-app.post("/api/products", async (req, res) => {
-    const product = req.body; //user will send this data
-
-    if (!product.name || !product.price || !product.image) {
-        return res.status(400).json({ success: false, message: "Please provide all fields" });
-    } //if any of the required fields are not provides, return the 400 code and the warning message
-
-    const newProduct = new Product(product);
-    try {
-        await newProduct.save();
-        res.status(201).json({ success: true, data: newProduct });
-    } catch (error) {
-        console.error("Error in creating product:", error.message); //for debugging
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-})
-
-//update a product
-app.put("/api/products/:id", async (req, res) => {
-    const { id } = req.params; // the id of the product to be updated
-
-    const product = req.body; // the product to be updated, contains name, price, image
-
-    //add the logic to check whether the id is valid or not
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ success: false, message: "Invalid Product Id" });
-    }
-
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true })  // if set new:true, it will give you the object after update is applied
-        console.log(updatedProduct);
-        res.status(200).json({ success: true, data: updatedProduct })
-    } catch (error) {
-        console.error("Error in updating product:", error.message); //for debugging
-        res.status(500).json({ success: false, message: "Server Error" });
-    }
-})
-
-//delete a product
-app.delete("/api/products/:id", async (req, res) => {
-    const { id } = req.params;
-    console.log(id);
-    try {
-        await Product.findByIdAndDelete(id);
-        res.status(200).json({ success: true, message: "Product deleted" });
-    } catch (error) {
-        console.log("error in deleting product:", error.message); //for debugging
-        res.status(404).json({ success: false, message: "Product not found" });
-    }
-})
+app.use("/api/products", productRoutes); // when we vist "/api/products", we will used the api endpoints defined in productRoutes
 
 app.listen(5000, () => {
     connectDB();
