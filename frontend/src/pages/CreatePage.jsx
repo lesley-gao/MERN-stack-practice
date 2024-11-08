@@ -25,6 +25,7 @@ const CreatePage = () => {
         setOpen(true); // Show the Snackbar
         console.log("Success:", success);
         console.log("Message:", message);
+        setNewProduct({name: "", price: "", image: ""});
     };
 
     const handleClose = (event, reason) => {
@@ -39,7 +40,7 @@ const CreatePage = () => {
             <Box
                 component="span"
                 sx={{
-                    color: mode === 'light' ? 'black' : 'white',
+                    color: mode === 'light' ? 'grey' : 'white',
                     fontWeight: 'bold',
                     fontSize: 25,
                     alignContent: 'center'
