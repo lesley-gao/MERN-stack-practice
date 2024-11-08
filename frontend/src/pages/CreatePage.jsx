@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, useTheme } from '@mui/material';
+import { useProductStore } from '../store/product';
 
 const CreatePage = () => {
     const theme = useTheme();
@@ -14,8 +15,12 @@ const CreatePage = () => {
 
     const [newProduct, setNewPeoduct] = useState({ name: "", price: "", image: "" });
 
-    const handleAddProduct = () => {
-        console.log(newProduct);
+    const {createProduct} = useProductStore();
+
+    const handleAddProduct = async () => {
+      const {success, message} = await createProduct(newProduct);
+      console.log("Success:", success);
+      console.log("Message: ", message);
     }
 
     return (
