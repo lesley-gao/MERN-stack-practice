@@ -40,10 +40,11 @@ const CreatePage = () => {
             <Box
                 component="span"
                 sx={{
-                    color: mode === 'light' ? 'grey' : 'white',
+                    color: mode === 'light' ? '#8B4513' : '#D2B48C',
                     fontWeight: 'bold',
                     fontSize: 25,
-                    alignContent: 'center'
+                    alignContent: 'center',
+                    marginBottom:5
                 }}
             >
                 Create New Product
@@ -73,15 +74,13 @@ const CreatePage = () => {
 
             <Button
                 variant="contained"
-                sx={{ minWidth: 1 / 3, background: 'linear-gradient(45deg, #2196F3, #21CBF3)' }}
+                sx={{ minWidth: 1 / 3, background: 'linear-gradient(45deg, #8B4513, #D2B48C)' }}
                 onClick={handleAddProduct}
             >
                 Add Product
             </Button>
 
-
             {/* if a product is added successfully, a successful alert will show up, otherwise, a waning alert will appear */}
-
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 {success ? (
                     <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>

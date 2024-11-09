@@ -16,6 +16,7 @@ const Navbar = ({ toggleColorMode }) => {
         justifyContent: 'center',
         minWidth: 48,
         height: 48,
+        color: mode === 'light' ? '#8B4513' : '#D2B48C'
     };
 
     return (
@@ -30,13 +31,12 @@ const Navbar = ({ toggleColorMode }) => {
                 {/* Logo with gradient text */}
                 <Typography
                     sx={{
-                        background: 'linear-gradient(45deg, #2196F3, #21CBF3)',
+                        background: 'linear-gradient(45deg, #D2B48C, #8B4513)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         fontWeight: 'bold',
                         fontSize: 30
                     }}
-
                 >
                     <Link to={"/"}>Product Store 🛒</Link>
                 </Typography>
@@ -49,12 +49,10 @@ const Navbar = ({ toggleColorMode }) => {
                     sx={{ mt: { sm: 2, md: 0 } }}
                 >
                     {/* Button that links to create page */}
-                    <Link to={"/create"}><Button
-
-                        sx={iconButtonStyle}
-                    >
-                        <AddBoxOutlinedIcon fontSize='large' />
-                    </Button></Link>
+                    <Link to={"/create"}>
+                        <Button sx={iconButtonStyle}>
+                            <AddBoxOutlinedIcon fontSize='large' />
+                        </Button></Link>
 
                     {/* Button to toggle between light and dark mode */}
                     <Button
