@@ -30,6 +30,8 @@ export const useProductStore = create((set) => ({
         });
         const data = await res.json();
         if (!data.success) return { success: false, message: data.message };
+
+        //update the UI immediately(delete the product on the homepage), witout needing a refresh
         set((state) => ({ products: state.products.filter(product => product._id !== pid) }));
         return { success: true, message: data.message };
     }

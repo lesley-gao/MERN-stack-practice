@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   // use useState() hook to track the color mode
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState('dark');
 
   // Memoized theme to optimize performance by avoiding unnecessary re-creations
   const theme = useMemo(
@@ -22,7 +22,7 @@ function App() {
 
 
   const toggleColorMode = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    setMode((prevMode) => (prevMode === 'dark' ? 'light' : 'dark'));
   };
 
   return (
