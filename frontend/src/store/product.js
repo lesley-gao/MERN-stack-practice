@@ -34,5 +34,35 @@ export const useProductStore = create((set) => ({
         //update the UI immediately(delete the product on the homepage), witout needing a refresh
         set((state) => ({ products: state.products.filter(product => product._id !== pid) }));
         return { success: true, message: data.message };
+    },
+    updateProduct: async (pid, updatedProduct) => {
+        if (!updatedProduct.name || !updatedProduct.price || !updatedProduct.image) {
+            return { success: false, message: "Please fill in all fields." };
+        }
+
+        const res = await fetch(`/api/products/${pid}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedProduct)
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+            return { success: false, message: data.message };
+        }
+
+        //update the UI immediately, witout needing a refresh
+        // if the product id is equal to the pid that we just passed, we can just return the data, 
+        // else, we'll leave the product as it is
+        set((state) => ({
+            products: state.products.map(product =>
+                product._id === pid ? data.data : product
+            )
+        }));
+
+        return { success: true, message: "Product updated successfully." };
     }
 }))
