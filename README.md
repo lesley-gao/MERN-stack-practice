@@ -33,47 +33,47 @@ Coffee Place is a full-stack e-commerce application built as a learning project 
 - 💅 Material UI components
  
 ## UI Preview
-![UI Preview](frontend/public/images/UI-Preview.gif)
+![UI Preview](frontend/public/images/UI%20Preview.gif)
 
 ## Getting Started
 ### Option 1: Visit Live Site
 Access the deployed application at [https://coffee-place.onrender.com/](https://coffee-place.onrender.com/)
 
-### Option 2: Local Development
+### Option 2: Run on your local machine
 
-#### Clone the repository
-```
-git clone [your-repo-url]
-```
-
-#### Install dependencies for both backend and frontend
-```
-# Install backend dependencies
-npm install
-
-# Install frontend dependencies
-cd frontend
-npm install
-```
-
-#### Build and start the application
-```
-# Build frontend
-cd frontend
-npm run build
-
-# Start the server (from root directory)
-cd ..
-npm run start
-```
-
-Open your browser and navigate to `http://localhost:5000`
-
-## Environment Setup
-1. Create a `.env` file in the root directory
-2. Add the following environment variables:
+#### Environment Setup
+1. Clone the repository
+2. Create a `.env` file in the root directory
+3. Add the following environment variables:
    
    ```
    PORT=5000
    MONGODB_URL=your_mongodb_connection_string
    ```
+
+#### Installation & Running
+
+- ##### Production Build
+1. Navigate to the root directory in the terminal
+2. Install dependencies and build the application:
+``` 
+npm run build
+```
+4. Start the application:
+``` 
+npm run start
+```   
+5. Access the application at `http://localhost:5000`
+
+- #### Development Mode
+
+1. Navigate to the frontend folder in the terminal
+  ``` 
+  npm install
+  npm run dev
+  ```
+2. Navigate to the backend folder in the terminal
+  ``` 
+  npm install
+  npm run dev
+  ```
