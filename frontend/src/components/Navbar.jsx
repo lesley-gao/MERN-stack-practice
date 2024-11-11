@@ -38,7 +38,7 @@ const Navbar = ({ toggleColorMode }) => {
                         fontSize: 30
                     }}
                 >
-                    <Link to={"/"}>Coffee Place ☕</Link>
+                    <Link to={"/"}>Coffee Place 🛒</Link>
                 </Typography>
 
                 {/* Icons and Toggle Button */}
