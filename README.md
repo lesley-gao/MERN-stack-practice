@@ -10,7 +10,9 @@
 ![image](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white) 
 ![image](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white) 
 
-This is a self-learning repository for a simple e-commerce application built with the MERN (MongoDB, Express.js, React.js, Node.js) stack, featuring product management capabilities and theme customization.
+This is a self-learning repository for a very simple e-commerce application built with the MERN (MongoDB, Express.js, React.js, Node.js) stack, featuring product management capabilities and theme customization.
+
+More functionalities will be added later. 😄
 
 🚀 **Live Demo**: [https://coffee-place.onrender.com/](https://coffee-place.onrender.com/)
 
